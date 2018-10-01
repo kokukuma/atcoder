@@ -9,27 +9,15 @@ odd  = [vi for i,vi in enumerate(v) if i % 2 == 1]
 evenc = collections.Counter(even)
 oddc = collections.Counter(odd)
 
-evenc_most_common = evenc.most_common(len(set(even)))
-oddc_most_common = oddc.most_common(len(set(odd)))
+evenc_most_common = evenc.most_common(len(set(even))) + [(None, 0)]
+oddc_most_common = oddc.most_common(len(set(odd))) + [(None, 0)]
 
-# print(evenc_most_common)
-# print(oddc_most_common)
+m = []
 
-if evenc_most_common[0][0] != oddc_most_common[0][0]:
-    a = len(even) - evenc_most_common[0][1]
-    b = len(odd) - oddc_most_common[0][1]
-    print(a+b)
-else:
-    if evenc_most_common[0][1] >= oddc_most_common[0][1]:
-        a = len(even) - evenc_most_common[0][1]
-        b = len(odd)
-        if len(oddc_most_common) > 1:
-            b = len(odd) - oddc_most_common[1][1]
-        print(a+b)
-    elif evenc_most_common[0][1] < oddc_most_common[0][1]:
-        a = len(odd) - oddc_most_common[0][1]
-        b = len(even)
-        if len(evenc_most_common) > 1:
-            b = len(even) - evenc_most_common[1][1]
-        print(a+b)
-
+for i in range(2):
+    for j in range(2):
+        if evenc_most_common[i][0] != oddc_most_common[j][0]:
+            a = len(even) - evenc_most_common[i][1]
+            b = len(odd) - oddc_most_common[j][1]
+            m.append(a+b)
+print(min(m))
