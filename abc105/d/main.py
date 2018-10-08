@@ -1,15 +1,25 @@
 N, M = map(int, raw_input().split())
+A = map(int, raw_input().split())
 
-a = []
-x = 1
-while x * x <= M:
-    if M % x == 0:
-        a.append(x)
-        a.append(M/x)
-    x += 1
+AX = []
+s = 0
+for a in A:
+    s += a
+    AX.append(s)
+
+B = {}
+B[0] = 1
+for i in range(N):
+    e = AX[i] % M
+    if e not in B:
+        B[e] = 1
+    else:
+        B[e] += 1
 
 res = 0
-for i in a:
-    if M / i >= N:
-        res = max(res, i)
+for _,v in B.items():
+    res += v * (v-1) / 2
+
 print(res)
+
+
